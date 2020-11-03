@@ -1,23 +1,26 @@
 <template>
   <div class="home">
-    <h1>Nouvelle attestation</h1>
+    <h1>Nouvelle attestation</h1> 
     <v-form
     ref="form"
     lazy-validation
   >
-    <v-col
-      cols="12"
-      sm="6"
-    >
-      <v-select
-        v-model="profileId"
-        :items="profiles"
-        :rules="[v => !!v || 'Profil requis']"
-        item-value="id"
-        item-text="profile_name"
-        label="Profil"
-      />
-    </v-col>
+    <v-row>
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <v-select
+          v-model="profileId"
+          :items="profiles"
+          :rules="[v => !!v || 'Profil requis']"
+          item-value="id"
+          item-text="profile_name"
+          label="Profil"
+        />
+      </v-col>
+      <router-link :to="{name: 'NewProfile'}" class="newProfile">Ajouter un nouveau profil</router-link>
+    </v-row>
 
     <v-subheader
     >
@@ -56,7 +59,7 @@
 
        <v-col
           cols="12"
-          sm="5"
+          sm="6"
         >
           <v-menu
             ref="menu"
@@ -72,7 +75,6 @@
               <v-text-field
                 v-model="times.creationTime"
                 label="Heure"
-                prepend-icon="mdi-clock-time"
                 readonly
                 v-bind="attrs"
                 v-on="on"
@@ -126,7 +128,7 @@
 
        <v-col
           cols="12"
-          sm="5"
+          sm="6"
         >
           <v-menu
             ref="menu"
@@ -142,7 +144,6 @@
               <v-text-field
                 v-model="times.time"
                 label="Heure"
-                prepend-icon="mdi-clock-time"
                 readonly
                 v-bind="attrs"
                 v-on="on"
@@ -229,10 +230,10 @@ export default {
   methods: {
     ...mapActions(['loadProfiles']),
     formatDate (date) {
-        if (!date) return null
-        const [year, month, day] = date.split('-')
-        return `${day}/${month}/${year}`
-      },
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     async generate () {
       let self = this
       let profile = this.profiles.find(profile => profile.id === self.profileId)
@@ -240,13 +241,7 @@ export default {
       const pdfBlob = await generatePdf(profile, this.times, [this.reason])
       const blobURL = URL.createObjectURL(pdfBlob);
       window.open(blobURL)
-
-      },
-    getLocaleTime () {
-      const now = new Date()
-      return now
-        .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-    }
+    },
   },
   mounted() {
     this.loadProfiles()
@@ -267,3 +262,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .newProfile {
+    margin: auto 0;
+  }
+</style>

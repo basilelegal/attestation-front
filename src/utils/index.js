@@ -110,11 +110,10 @@ export async function generatePdf (profile, times, reasons) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  drawText(`${firstname} ${lastname}`, 137, 701)
-  drawText(birthdate, 137, 683)
-  drawText(birthplace, 200, 683)
-  drawText(`${address} ${zipcode} ${city}`, 137, 664)
-
+  drawText(`${firstname} ${lastname}`, 119, 696)
+  drawText(birthdate, 119, 674)
+  drawText(birthplace, 297, 674)
+  drawText(`${address} ${zipcode} ${city}`, 133, 652)
 
   reasons
     .forEach(reason => {
