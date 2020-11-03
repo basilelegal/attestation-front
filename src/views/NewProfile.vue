@@ -119,12 +119,6 @@
         <v-btn
           color="blue darken-1"
           text
-        >
-          Close
-        </v-btn>
-        <v-btn
-          color="blue darken-1"
-          text
           @click="saveProfile"
         >
           Enregistrer
