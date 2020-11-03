@@ -20,14 +20,20 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <v-text-field
                 v-model="formData.firstname"
                 label="Prénom*"
                 :rules="required"
               />
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <v-text-field
                 v-model="formData.lastname"
                 label="Nom*"
@@ -36,43 +42,46 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <v-text-field
                 v-model="formData.birthplace"
                 label="Lieu de naissance*"
                 :rules="required"
               />
             </v-col>
-             <v-col
-                cols="12"
-                sm="6"
+            <v-col
+              cols="12"
+              sm="6"
+            >
+              <v-menu
+                v-model="dateMenu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
               >
-                <v-menu
-                  v-model="dateMenu"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="290px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="dateFormatted"
-                      label="Date de naissance"
-                      prepend-icon="mdi-clock-time-four-outline"
-                      v-bind="attrs"
-                      v-on="on"
-                      :rules="required"
-                    />
-                  </template>
-                  <v-date-picker
-                    v-model="formData.birthdate"
-                    locale="fr-fr"
-                    @input="dateMenu = false"
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="dateFormatted"
+                    label="Date de naissance"
+                    prepend-icon="mdi-clock-time-four-outline"
+                    v-bind="attrs"
+                    :rules="required"
+                    v-on="on"
                   />
-                </v-menu>
-              </v-col>
+                </template>
+                <v-date-picker
+                  v-model="formData.birthdate"
+                  locale="fr-fr"
+                  @input="dateMenu = false"
+                />
+              </v-menu>
+            </v-col>
           </v-row>
-           <v-row>
+          <v-row>
             <v-col cols="12">
               <v-text-field
                 v-model="formData.address"
@@ -82,14 +91,20 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <v-text-field
                 v-model="formData.zipcode"
                 label="Code postal*"
                 :rules="required"
               />
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <v-text-field
                 v-model="formData.city"
                 label="Ville*"
@@ -123,9 +138,6 @@
   import {mapActions} from 'vuex'
   export default {
     name: 'NewProfile',
-    computed: {
-      date () { return this.formData.birthdate },
-    },
     data (vm) {
       return {
         formData: {
@@ -146,6 +158,14 @@
         ]
       }
     },
+    computed: {
+      date () { return this.formData.birthdate },
+    },
+    watch: {
+      date () {
+        this.dateFormatted = this.formatDate(this.formData.birthdate)
+      },
+    },
     methods: {
       ...mapActions(['postProfile']),
       formatDate (date) {
@@ -156,11 +176,6 @@
       saveProfile () {
         if (!this.$refs.form.validate()) return
         this.postProfile(this.formData)
-      },
-    },
-    watch: {
-      date () {
-        this.dateFormatted = this.formatDate(this.formData.birthdate)
       },
     },
   }
