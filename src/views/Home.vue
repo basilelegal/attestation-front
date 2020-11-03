@@ -186,6 +186,7 @@
 
           <v-img
             v-if="reason.code === 'achat_de_carrottes'"
+            class="carrotte-img"
             src="../assets/carrottes.jpg"
             width="400px"
           />
@@ -194,7 +195,6 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
-          class="mr-4"
           text
           color="primary"
           @click="generate"

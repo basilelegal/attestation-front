@@ -1,8 +1,13 @@
+<style scoped>
+
+</style>
+
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">Nouvelle Profil</span>
+      <span class="headline">Nouveau Profil</span>
     </v-card-title>
+
     <v-form
       ref="form"
       v-model="valid"
@@ -67,7 +72,6 @@
                   <v-text-field
                     v-model="dateFormatted"
                     label="Date de naissance"
-                    prepend-icon="mdi-clock-time-four-outline"
                     v-bind="attrs"
                     :rules="required"
                     v-on="on"
@@ -117,7 +121,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
-          color="blue darken-1"
+          color="primary"
           text
           @click="saveProfile"
         >
