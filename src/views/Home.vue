@@ -1,10 +1,14 @@
 <template>
-  <div class="home">
-    <h1>Nouvelle attestation</h1> 
+  <v-card>
+    <v-card-title>
+      <span class="headline">Nouvelle attestation</span>
+    </v-card-title>
     <v-form
       ref="form"
       lazy-validation
     >
+     <v-card-text>
+        <v-container>
       <v-row>
         <v-col
           cols="12"
@@ -186,14 +190,21 @@
         width="400px"
       />
 
+      </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
       <v-btn
         class="mr-4"
+        text
+        color="primary"
         @click="generate"
       >
         Générer
       </v-btn>
+      </v-card-actions>
     </v-form>
-  </div>
+    </v-card>
 </template>
 
 <script>
